@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-gold-50: #fefdf6;
+  --color-gold-100: #fcfbeb;
+  --color-gold-200: #f7f4cc;
+  --color-gold-300: #efea9e;
+  --color-gold-400: #e2d866;
+  --color-gold-500: #d4af37; /* Warm brand gold */
+  --color-gold-600: #b5952f;
+  --color-gold-700: #907624;
+  --color-gold-800: #745f1f;
+  --color-gold-900: #62501a;
+  --color-gold-950: #382e0e;
+  
+  --color-cafe-950: #050302; /* Extremely dark black-brown */
+  --color-cafe-900: #0d0807;
+  --color-cafe-800: #180f0d;
+  --color-cafe-700: #241613;
+  --color-cafe-600: #35211c;
+  --color-cafe-500: #492e27;
+}
+
+@utility glassmorphic {
+  background: rgba(13, 8, 7, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@utility glassmorphic-hover {
+  background: rgba(20, 12, 10, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+@utility glassmorphic-light {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+@utility text-glow {
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+html, body {
+  background-color: #050302;
+  color: #e5e5e5;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050302;
+}
+::-webkit-scrollbar-thumb {
+  background: #180f0d;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #241613;
+}
+
+/* Smooth glass entry animation */
+@keyframes glass-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-glass-in {
+  animation: glass-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1.02);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenburns 40s ease-in-out infinite;
+}
