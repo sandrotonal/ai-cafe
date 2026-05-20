@@ -1,4 +1,4 @@
-# ☕ SEISTE CAFE - AI Concierge Gastronomy
+#  SEISTE CAFE - AI Concierge Gastronomy
 
 <div align="center">
   <img src="./public/images/cafe_interior.png" alt="Seiste Cafe" width="100%" style="border-radius: 10px; margin-bottom: 20px;" />
@@ -7,18 +7,17 @@
 
 ---
 
-## 🌟 Proje Hakkında
+##  Proje Hakkında
 
 **Seiste Cafe**, Nişantaşı'nın kalbinde yer alan, butik kahve deneyimini ve zanaatkar çikolata sanatını dijital bir şahesere dönüştüren modern bir web platformudur. Sadece bir bilgilendirme sitesi değil, aynı zamanda misafirlere özel bir **AI Concierge (Yapay Zeka Danışmanı)** hizmeti sunan interaktif bir deneyim alanıdır.
 
-## ✨ Temel Özellikler
+##  Temel Özellikler
 
-- **🤖 Akıllı AI Danışmanı:** OpenAI destekli (simüle edilmiş/entegre edilebilir) akıllı sohbet arayüzü ile menü detayları, kahve kökenleri ve çikolata içerikleri hakkında anlık bilgi.
-- **📅 Akıllı Rezervasyon:** AI üzerinden sesli veya metin tabanlı (simüle) kolay masa rezervasyon akışı.
-- **🎞️ Premium UI/UX:** Framer Motion ile güçlendirilmiş, akışkan geçişler ve lüks bir görsellik sunan modern arayüz.
-- **☕ Gastronomi Kütüphanesi:** Ethiopia Yirgacheffe'den Panama Geisha'ya, el yapımı Belçika trüflerinden özel patisserie ürünlerine kadar detaylı ürün kürasyonu.
-- **📱 Tam Duyarlı Tasarım:** Masaüstü, tablet ve mobil cihazlar için optimize edilmiş kusursuz görünüm.
-
+- ** Akıllı AI Danışmanı:** OpenAI destekli (simüle edilmiş/entegre edilebilir) akıllı sohbet arayüzü ile menü detayları, kahve kökenleri ve çikolata içerikleri hakkında anlık bilgi.
+- ** Akıllı Rezervasyon:** AI üzerinden sesli veya metin tabanlı (simüle) kolay masa rezervasyon akışı.
+- ** Premium UI/UX:** Framer Motion ile güçlendirilmiş, akışkan geçişler ve lüks bir görsellik sunan modern arayüz.
+- ** Gastronomi Kütüphanesi:** Ethiopia Yirgacheffe'den Panama Geisha'ya, el yapımı Belçika trüflerinden özel patisserie ürünlerine kadar detaylı ürün kürasyonu.
+- ** Tam Duyarlı Tasarım:** Masaüstü, tablet ve mobil cihazlar için optimize edilmiş kusursuz görünüm.
 ## 🛠️ Teknoloji Yığını
 
 - **Framework:** [React 19](https://react.dev/)
@@ -28,7 +27,7 @@
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 
-## 🚀 Başlangıç
+##  Başlangıç
 
 Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
