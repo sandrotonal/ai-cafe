@@ -1,14 +1,17 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa6';
+
+type ViewType = 'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms';
 
 interface NavbarProps {
-  currentView: 'home' | 'ai' | 'about' | 'contact';
-  onNavigate: (view: 'home' | 'ai' | 'about' | 'contact') => void;
+  currentView: ViewType;
+  onNavigate: (view: ViewType) => void;
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
 }
 
 export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen }: NavbarProps) {
-  const handleItemClick = (view: 'home' | 'ai' | 'about' | 'contact') => {
+  const handleItemClick = (view: ViewType) => {
     onNavigate(view);
     setMenuOpen(false);
   };
@@ -132,53 +135,82 @@ export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen 
 
               <div className="flex flex-col justify-between h-full gap-8 mt-12">
                 {/* Menu items */}
-                <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-4">
                   <button
                     onClick={() => handleItemClick('home')}
-                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors ${
-                      currentView === 'home' ? 'text-white font-semibold' : 'text-white/40'
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'home' ? 'text-white font-semibold' : 'text-white/45'
                     }`}
                   >
                     HOME
                   </button>
                   <button
                     onClick={() => handleItemClick('ai')}
-                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors ${
-                      currentView === 'ai' ? 'text-white font-semibold' : 'text-white/40'
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'ai' ? 'text-white font-semibold' : 'text-white/45'
                     }`}
                   >
                     AI SOMMELIER
                   </button>
                   <button
                     onClick={() => handleItemClick('about')}
-                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors ${
-                      currentView === 'about' ? 'text-white font-semibold' : 'text-white/40'
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'about' ? 'text-white font-semibold' : 'text-white/45'
                     }`}
                   >
                     ABOUT US
                   </button>
                   <button
                     onClick={() => handleItemClick('contact')}
-                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors ${
-                      currentView === 'contact' ? 'text-white font-semibold' : 'text-white/40'
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'contact' ? 'text-white font-semibold' : 'text-white/45'
                     }`}
                   >
                     CONTACT
                   </button>
-                  <a
-                    href="#privacy"
-                    onClick={() => setMenuOpen(false)}
-                    className="text-sm font-sans tracking-[0.25em] uppercase text-white/40 hover:text-white transition-colors text-left"
+
+                  {/* Decorative divider line for legal texts */}
+                  <div className="border-t border-white/10 my-2.5" />
+
+                  <button
+                    onClick={() => handleItemClick('privacy')}
+                    className={`text-[10px] font-sans tracking-[0.2em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'privacy' ? 'text-white font-medium' : 'text-white/40'
+                    }`}
                   >
-                    PRIVACY POLICY
-                  </a>
+                    GİZLİLİK POLİTİKASI
+                  </button>
+                  <button
+                    onClick={() => handleItemClick('cookies')}
+                    className={`text-[10px] font-sans tracking-[0.2em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'cookies' ? 'text-white font-medium' : 'text-white/40'
+                    }`}
+                  >
+                    ÇEREZ POLİTİKASI
+                  </button>
+                  <button
+                    onClick={() => handleItemClick('terms')}
+                    className={`text-[10px] font-sans tracking-[0.2em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'terms' ? 'text-white font-medium' : 'text-white/40'
+                    }`}
+                  >
+                    KULLANIM KOŞULLARI
+                  </button>
                 </div>
 
                 {/* Footer of the Drawer */}
-                <div className="flex justify-between items-center border-t border-white/5 pt-8">
-                  <div className="flex gap-6 text-[10px] font-sans tracking-[0.2em] text-white/40">
-                    <a href="#about" onClick={() => handleItemClick('about')} className="hover:text-white transition-colors">COMPANY</a>
-                    <a href="#instagram" className="hover:text-white transition-colors">INSTAGRAM</a>
+                <div className="flex justify-between items-center border-t border-white/5 pt-6 mt-2">
+                  <span className="text-[8px] font-sans tracking-[0.2em] text-white/35 uppercase">TAKİP EDİN</span>
+                  <div className="flex gap-5 items-center text-white/45">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Instagram">
+                      <FaInstagram size={14} />
+                    </a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Twitter/X">
+                      <FaTwitter size={14} />
+                    </a>
+                    <a href="mailto:contact@seiste.com" className="hover:text-white transition-colors" title="Email">
+                      <FaEnvelope size={14} />
+                    </a>
                   </div>
                 </div>
               </div>

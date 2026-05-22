@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa6';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import AIChat from './components/AIChat';
 import About from './components/About';
 import Contact from './components/Contact';
+import Legal from './components/Legal';
+import CookieBanner from './components/CookieBanner';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'ai' | 'about' | 'contact'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms'>('home');
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleNavigate = (view: 'home' | 'ai' | 'about' | 'contact') => {
+  const handleNavigate = (view: 'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms') => {
     setCurrentView(view);
   };
 
@@ -19,6 +22,9 @@ export default function App() {
     ai: '/images/specialty_coffee.png',
     about: '/images/chocolate_dessert.png',
     contact: '/images/chocolate_truffles.png',
+    cookies: '/images/chocolate_truffles.png',
+    privacy: '/images/chocolate_truffles.png',
+    terms: '/images/chocolate_truffles.png',
   };
 
   return (
@@ -87,7 +93,7 @@ export default function App() {
               transition={{ duration: 0.25 }}
               className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
-              <About onNavigate={handleNavigate} />
+              <About />
             </motion.div>
           )}
 
@@ -103,26 +109,56 @@ export default function App() {
               <Contact />
             </motion.div>
           )}
+
+          {['cookies', 'privacy', 'terms'].includes(currentView) && (
+            <motion.div
+              key="legal-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
+            >
+              <Legal
+                activeTab={currentView as 'cookies' | 'privacy' | 'terms'}
+                setActiveTab={(tab) => setCurrentView(tab)}
+              />
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
+
+      {/* Cookie consent notification banner floating at the bottom */}
+      <CookieBanner onNavigate={handleNavigate} />
 
       {/* Premium Footer — Clean on Mobile */}
       <footer className="fixed bottom-0 left-0 right-0 z-20 pointer-events-none select-none">
         <div className="border-t border-white/5 bg-black/50 backdrop-blur-xl">
           <div className="max-w-6xl mx-auto px-5 md:px-12 py-3 md:py-4 flex items-center justify-between">
-            {/* Brand & Copyright — Always Visible */}
-            <div className="flex items-center gap-3">
+            {/* Brand & Copyright & Developer — Always Visible */}
+            <div className="flex flex-col sm:flex-row sm:items-center items-start gap-1 sm:gap-3 pointer-events-auto">
               <span className="text-[9px] font-sans tracking-[0.2em] text-white/45 uppercase font-semibold">SEISTE</span>
-              <span className="hidden sm:inline text-[8px] font-sans tracking-[0.15em] text-white/20">© 2026</span>
+              <span className="text-[7px] sm:text-[8px] font-sans tracking-[0.10em] sm:tracking-[0.15em] text-white/30">
+                © 2026 · Developed by <a href="https://gucluyumhe.dev/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors underline decoration-white/20 underline-offset-2">gucluyumhe.dev</a>
+              </span>
             </div>
-            {/* Center: Address — Hidden on Mobile */}
+            
+            {/* Center: Address — Hidden on Mobile (Removed Days and Hours) */}
             <span className="hidden md:block text-[8px] font-sans tracking-[0.15em] text-white/25">
-              Valikonağı Cad. No: 42, Nişantaşı · PZT-CUM 09-23 · CMT-PZR 09-00
+              Valikonağı Cad. No: 42, Nişantaşı
             </span>
-            {/* Right: Social — Compact */}
-            <div className="flex gap-4 pointer-events-auto">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-[8px] font-sans tracking-[0.15em] text-white/30 hover:text-white transition-colors uppercase">IG</a>
-              <a href="mailto:contact@seiste.com" className="text-[8px] font-sans tracking-[0.15em] text-white/30 hover:text-white transition-colors uppercase">Email</a>
+            
+            {/* Right: Social with real Icons — Compact */}
+            <div className="flex gap-4 items-center pointer-events-auto text-white/30">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Instagram">
+                <FaInstagram size={15} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Twitter/X">
+                <FaTwitter size={15} />
+              </a>
+              <a href="mailto:contact@seiste.com" className="hover:text-white transition-colors" title="Email Gönder">
+                <FaEnvelope size={15} />
+              </a>
             </div>
           </div>
         </div>

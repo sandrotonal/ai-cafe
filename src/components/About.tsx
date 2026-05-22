@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface AboutProps {
-  onNavigate: (view: 'home' | 'ai' | 'about' | 'contact') => void;
-}
-
-export default function About({ onNavigate }: AboutProps) {
+export default function About() {
   const [activePillar, setActivePillar] = useState<'coffee' | 'chocolate' | 'atelier'>('coffee');
 
   const pillars = {
@@ -142,27 +138,6 @@ export default function About({ onNavigate }: AboutProps) {
             </div>
           </motion.div>
         </AnimatePresence>
-
-        {/* Navigation Buttons */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="flex flex-row gap-2.5 items-center justify-center w-full mt-14 md:mt-18"
-        >
-          <button
-            onClick={() => onNavigate('ai')}
-            className="px-4 py-2 border border-white/10 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/70 bg-transparent hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
-          >
-            Sommelier
-          </button>
-          <button
-            onClick={() => onNavigate('contact')}
-            className="px-4 py-2 border border-white/10 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/70 bg-transparent hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
-          >
-            İletişim
-          </button>
-        </motion.div>
       </div>
 
     </div>
