@@ -1,97 +1,166 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface AboutProps {
   onNavigate: (view: 'home' | 'ai' | 'about' | 'contact') => void;
 }
 
 export default function About({ onNavigate }: AboutProps) {
-  const chapters = [
-    {
+  const [activePillar, setActivePillar] = useState<'coffee' | 'chocolate' | 'atelier'>('coffee');
+
+  const pillars = {
+    coffee: {
       num: '01',
-      title: 'KÖKEN & SAFLIK',
-      text: 'Çikolatalarımızda yalnızca sürdürülebilir tarım yapan mikro-lot üreticilerin kakao çekirdeklerini kullanıyoruz. Madagaskar, Ekvador ve Kolombiya kökenli saf kuvertürlerimizi Nişantaşı şubemizdeki cam bölmeli açık atölyede günlük olarak el işçiliğiyle işliyoruz.'
+      title: 'KAHVE SANATI',
+      tagline: 'Asidite ve aroma dengesini en berrak haliyle fincanınıza taşıyoruz.',
+      text: 'Kahve demleme süreçlerimizde, çekirdeğin tüm aromatik potansiyelini en üst düzeye çıkaran hafif-orta kavurma profilini benimsiyoruz. Yalnızca sürdürülebilir tarım standartlarında üretilen, yüksek puanlı mikro-lot çekirdekleri tercih ediyoruz. V60 ve Chemex gibi nitelikli demleme yöntemleriyle; yasemin çiçeği, bergamot, mandalina ve karamel notalarını berrak bir gövdeyle sunuyoruz.',
+      metrics: [
+        { label: 'SCA Skoru', value: '85+', desc: 'Nitelikli Standart' },
+        { label: 'Kavurma', value: 'Hafif-Orta', desc: 'Aroma Koruma' },
+        { label: 'Demleme', value: 'V60 & Chemex', desc: 'Temiz Gövde' }
+      ]
     },
-    {
+    chocolate: {
       num: '02',
-      title: 'ZANAATKAR KAVURMA',
-      text: 'Kahve demleme süreçlerimizde, çekirdeğin aroma potansiyelini en üst düzeye çıkaran hafif-orta kavurma profilini benimsiyoruz. V60 ve Chemex yöntemleriyle, narenciye, bergamot ve karamel notalarını en berrak haliyle fincanınıza aktarıyoruz.'
+      title: 'ZANAATKAR ÇİKOLATA',
+      tagline: 'El yapımı Belçika çikolatasını en saf kakao çekirdekleriyle işliyoruz.',
+      text: 'Çikolatalarımızda yalnızca sürdürülebilir kakao tarımı yapan Madagaskar, Ekvador ve Kolombiya kökenli saf kuvertürler kullanıyoruz. Kakao yağının ve aromasının bozulmaması için geleneksel Belçika çikolatası işleme ve temperleme tekniklerini hassasiyetle uyguluyoruz. Taze krema dolguları ve kavrulmuş Antep fıstıklı pralinlerimizle gurme tatları buluşturuyoruz.',
+      metrics: [
+        { label: 'Kakao', value: '%70+ Madagaskar', desc: 'Mikro-Lot Köken' },
+        { label: 'İçerik', value: '%100 Kakao Yağı', desc: 'Katkısız Saf' },
+        { label: 'İmza', value: '24K Altın Yaprak', desc: 'El Yapımı Süsleme' }
+      ]
     },
-    {
+    atelier: {
       num: '03',
-      title: 'BÜTÜNSEL DENEYİM',
-      text: 'Nişantaşı şubemizde sizleri sadece gurme lezzetleri tatmaya değil; mimari estetik, sakin caz tonları ve el yapımı çikolata kokusunun uyum sağladığı bütünsel bir gastronomi deneyimini yaşamaya davet ediyoruz.'
+      title: 'ATÖLYE DENEYİMİ',
+      tagline: 'Nişantaşı şubemizde gastronomi ve sanatı bir araya getiriyoruz.',
+      text: 'Nişantaşı şubemizin bünyesinde yer alan cam bölmeli açık atölyemizde, tüm çikolata ve gurme tatlılarımız günlük olarak gözlerinizin önünde üretilir. Tasarım estetiğimiz, loş amber ışıklarımız, sakin caz melodilerimiz ve mekanda süzülen taze çikolata kokusuyla misafirlerimize yalnızca bir lezzet değil, duyulara hitap eden bütünsel bir gastronomi deneyimi yaşatıyoruz.',
+      metrics: [
+        { label: 'Atölye', value: 'Cam Bölmeli', desc: 'Canlı Üretim' },
+        { label: 'Konum', value: 'Nişantaşı', desc: 'Valikonağı Cad.' },
+        { label: 'Konsept', value: 'Bütünsel', desc: 'Duyusal Deneyim' }
+      ]
     }
-  ];
+  };
+
+  const pillarKeys = ['coffee', 'chocolate', 'atelier'] as const;
+  const pillarLabels = ['Kahve', 'Çikolata', 'Atölye'];
 
   return (
-    <div className="min-h-screen w-full bg-transparent text-white flex flex-col pt-24 pb-24 px-5 md:px-12 relative z-10 select-none">
+    <div className="min-h-screen w-full bg-transparent text-white flex flex-col pt-24 pb-20 px-5 md:px-12 relative z-10 select-none">
       
       <div className="flex-1 max-w-5xl w-full mx-auto flex flex-col justify-center my-auto">
+        
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col gap-10 md:gap-0 md:grid md:grid-cols-12 items-start w-full"
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-10 md:mb-14"
         >
-          {/* Left Column: Brand Header */}
-          <div className="md:col-span-4 flex flex-col gap-6 md:border-r md:border-white/5 md:pr-10 w-full text-center md:text-left">
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[9px] font-sans tracking-[0.3em] text-white/40 uppercase font-semibold">
-                BİZİM HİKAYEMİZ
-              </span>
-              <h1 className="text-3xl md:text-5xl font-serif font-light tracking-[0.1em] leading-tight uppercase">
-                SEISTE
-                <br />
-                SANATI.
-              </h1>
-            </div>
-            
-            <div className="flex flex-row md:flex-col gap-4 md:gap-1 border-t border-white/5 pt-4 mt-2 md:mt-auto justify-center md:justify-start">
-              <span className="text-[9px] font-sans tracking-[0.2em] text-white/30 uppercase">EST. 2021</span>
-              <span className="text-[9px] font-sans tracking-[0.2em] text-white/50 uppercase font-semibold">NİŞANTAŞI</span>
-            </div>
-          </div>
-
-          {/* Right Column: Chapters */}
-          <div className="md:col-span-8 md:pl-10 flex flex-col gap-0 w-full">
-            {chapters.map((ch, i) => (
-              <motion.div 
-                key={ch.num}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.15 * (i + 1), duration: 0.6 }}
-                className={`flex flex-col gap-2.5 py-5 ${i > 0 ? 'border-t border-white/5' : ''}`}
-              >
-                <div className="flex justify-between items-center">
-                  <span className="text-[9px] font-sans tracking-[0.2em] text-white/25">{ch.num}</span>
-                  <span className="text-[9px] font-sans tracking-[0.2em] text-white/45 uppercase font-medium">{ch.title}</span>
-                </div>
-                <p className="text-[11px] md:text-[13px] leading-relaxed text-white/65 font-light">
-                  {ch.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+          <span className="text-[8px] font-sans tracking-[0.3em] text-white/30 uppercase font-semibold">
+            EST. 2021 · NİŞANTAŞI
+          </span>
+          <h1 className="text-3xl md:text-5xl font-serif font-light tracking-[0.1em] leading-tight uppercase mt-2">
+            BİZİM HİKAYEMİZ
+          </h1>
         </motion.div>
 
-        {/* Compact Buttons — Always Side-by-Side */}
+        {/* Pillar Switcher — Inline elegant tabs */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+          className="flex gap-1 mb-10 border-b border-white/5 pb-0"
+        >
+          {pillarKeys.map((key, idx) => (
+            <button
+              key={key}
+              onClick={() => setActivePillar(key)}
+              className={`px-5 py-3 text-[9px] tracking-[0.2em] font-sans uppercase transition-all duration-300 border-b-2 cursor-pointer ${
+                activePillar === key
+                  ? 'text-white/90 border-white/40 font-medium'
+                  : 'text-white/25 border-transparent hover:text-white/50'
+              }`}
+            >
+              <span className="text-[7px] text-white/15 mr-2 font-mono">{String(idx + 1).padStart(2, '0')}</span>
+              {pillarLabels[idx]}
+            </button>
+          ))}
+        </motion.div>
+
+        {/* Content Area */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activePillar}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+            className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start"
+          >
+            {/* Left: Title and Tagline */}
+            <div className="md:col-span-5 flex flex-col gap-4">
+              <h2 className="text-xl md:text-3xl font-serif font-light tracking-[0.08em] text-white/90 uppercase leading-tight">
+                {pillars[activePillar].title}
+              </h2>
+              <p className="text-[12px] md:text-[13px] font-serif italic text-white/50 font-light leading-relaxed max-w-md">
+                "{pillars[activePillar].tagline}"
+              </p>
+
+              {/* Metrics */}
+              <div className="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-white/5">
+                {pillars[activePillar].metrics.map((m, index) => (
+                  <div key={index} className="flex flex-col gap-0.5">
+                    <span className="text-[7px] font-sans tracking-[0.2em] text-white/20 uppercase font-semibold">
+                      {m.label}
+                    </span>
+                    <span className="text-[11px] font-serif text-white/80 font-light tracking-wide">
+                      {m.value}
+                    </span>
+                    <span className="text-[7px] text-white/25 font-sans tracking-wide">
+                      {m.desc}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Description */}
+            <div className="md:col-span-7 flex flex-col gap-6">
+              <p className="text-[12px] md:text-[13px] leading-[1.9] text-white/45 font-light">
+                {pillars[activePillar].text}
+              </p>
+              
+              {/* Decorative Watermark */}
+              <div className="flex items-end justify-end mt-auto">
+                <span className="text-[80px] md:text-[120px] font-serif font-light text-white/[0.02] leading-none select-none">
+                  {pillars[activePillar].num}
+                </span>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Buttons */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="flex flex-row gap-2.5 items-center justify-center w-full mt-10 md:mt-16"
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="flex flex-row gap-2.5 items-center justify-center w-full mt-14 md:mt-18"
         >
           <button
             onClick={() => onNavigate('ai')}
-            className="px-4 py-2 border border-white/15 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/90 bg-white/[0.02] hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
+            className="px-4 py-2 border border-white/10 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/70 bg-transparent hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
           >
-            YAPAY ZEKA
+            Sommelier
           </button>
           <button
             onClick={() => onNavigate('contact')}
-            className="px-4 py-2 border border-white/15 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/90 bg-white/[0.02] hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
+            className="px-4 py-2 border border-white/10 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/70 bg-transparent hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
           >
-            İLETİŞİM
+            İletişim
           </button>
         </motion.div>
       </div>

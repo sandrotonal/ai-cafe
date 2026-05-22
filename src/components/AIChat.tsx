@@ -21,7 +21,14 @@ interface AIChatProps {
 }
 
 export default function AIChat({ initialHasStarted }: AIChatProps) {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      id: 'welcome',
+      sender: 'ai',
+      text: 'Seiste dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım.\n\nNitelikli kahve seçkilerimiz, el yapımı Belçika çikolatalarımız veya masa rezervasyonu hakkında yardımcı olabilirim.',
+      timestamp: new Date()
+    }
+  ]);
   const [hasStarted, setHasStarted] = useState(initialHasStarted);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -37,65 +44,70 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
     }
   }, [messages, isTyping, hasStarted]);
 
-  // Comprehensive Menu and Information database
   const menuDatabase = {
-    coffees: `
-SEISTE NITELIKLI KAHVE KÜTÜPHANESI:
+    coffees: `SEISTE NİTELİKLİ KAHVE SEÇKİSİ
 
-1. Demleme Seçenekleri (Single Origin & Special Reserve):
-- **Ethiopia Yirgacheffe (V60 / Chemex)**: Yasemin çiçeği, bergamot ve şeftali notaları barındıran, yüksek asiditeli ve narin gövdeli bir Afrika klasiği.
-- **Colombia Supremo (V60 / Chemex)**: Karamelize şeker, kakao ve kırmızı orman meyveleri tonları sunan, dengeli ve orta gövdeli bir Güney Amerika klasiği.
-- **Panama Geisha (Special Reserve)**: Yasemin çiçeği, mandalina, bal ve bergamot aromaları içeren, kahve dünyasının en seçkin ve nadide çekirdeklerinden biri.
+**Demleme — Single Origin & Special Reserve**
 
-2. Espresso ve Kadife Dokular:
-- **Espresso / Ristretto / Macchiato**: Kendi özel Seiste harmanımızdan üretilen yoğun, gövdeli ve fındık kreması bitişli klasik shotlar.
-- **Cortado**: Çift shot ristretto espresso ile eşit miktarda taze, kadifemsi sıcak süt dengesi.
-- **Velvet Flat White**: İnce bir mikro köpük tabakasıyla hazırlanan çift shot ristretto espresso ve süt uyumu.
-- **Seiste Signature Affogato**: Organik vanilyalı dondurma yatağında taze çekilmiş sıcak espresso ve rendelenmiş %70 Madagaskar çikolatası.
-- **Velvet Mocha**: Eritilmiş el yapımı bitter çikolata, double espresso ve kadifemsi sütün kusursuz uyumu.
-    `,
-    chocolates: `
-SEISTE EL YAPIMI GURME ÇIKOLATA & TATLI SEÇKISI:
+- **Ethiopia Yirgacheffe** — V60 / Chemex
+  Yasemin çiçeği, bergamot, şeftali. Yüksek asiditeli, narin gövde.
 
-1. Zanaatkar Trüfler & Tabletler:
-- **Seiste Gold Leaf Truffle**: %74 Madagaskar kakao çekirdeklerinden el yapımı üretilen, taze krema dolgulu ve yenilebilir 24 ayar altın yaprağı süslemeli imza Belçika trüfü.
-- **Belgian Sea Salt Truffle**: Tuzlu karamel dolgulu, dışı ince deniz tuzu kristalleriyle kaplı sütlü gurme trüf.
-- **Pistachio Praline**: Kavrulmuş Antep fıstığı ezmesi dolgulu, dışı kıtır parçacıklı el yapımı bitter çikolata kubbesi.
-- **Madagascar Origin Tablet**: Madagaskar'ın özel mikro-lot bahçelerinden toplanan kakao çekirdekleriyle üretilen, narenciye ve odunsu asidite içeren %70 saf çikolata.
+- **Colombia Supremo** — V60 / Chemex
+  Karamelize şeker, kakao, kırmızı orman meyveleri. Dengeli, orta gövde.
 
-2. Gurme Tatlılar (Patisserie):
-- **Artisan Dome Dessert**: Alt tabanında kıtır fındıklı pralin, orta katmanında taze frambuaz jölesi ve dış kaplamasında kadife dokulu çikolata mus bulunan gurme tatlımız.
-- **Signature Hot Chocolate (Sıcak Çikolata Şelalesi)**: Akışkan, eritilmiş sıcak Belçika çikolatası, organik krema ve vanilya çubuğu infüzyonu ile hazırlanan yoğun kıvamlı sıcak içecek.
-- **Seiste Tarte**: Kakao sablesi üzerinde fırınlanmış çikolatalı krem karamel ve tuzlu tereyağı karameli dolgulu tart.
-    `,
-    location: `
-SEISTE CAFE KONUM & İLETIŞIM BILGILERI:
+- **Panama Geisha** — Special Reserve
+  Yasemin, mandalina, bal, bergamot. Nadide ve seçkin.
 
-- **Şubemiz**: Nişantaşı, İstanbul.
-- **Açık Adres**: Valikonağı Caddesi No: 42, Nişantaşı, Şişli / İstanbul (Harbiye Metro istasyonuna 5 dakika yürüme mesafesinde).
-- **Telefon**: +90 (212) 555 45 45.
-- **Çalışma Saatleri**: 
-  - Hafta içi (Pazartesi - Cuma): 09:00 - 23:00
-  - Hafta sonu (Cumartesi - Pazar): 09:00 - 00:00
-- **Çikolata Üretim Atölyesi**: Tüm çikolata ve tatlılarımız Nişantaşı şubemizin bünyesindeki cam bölmeli açık atölyede günlük olarak taze üretilmektedir.
-    `,
-    story: `
-SEISTE HIKAYESI:
+**Espresso & Kadife Dokular**
 
-Seiste, nitelikli kahve kültürü ile el yapımı gurme çikolata sanatını aynı çatı altında birleştiren lüks bir gastronomi projesidir. Belçika çikolatası işleme tekniklerini, dünya üzerindeki özel mikro-lot kahve çiftliklerinden getirdiğimiz çekirdeklerle harmanlıyoruz. Nişantaşı şubemizde misafirlerimize sadece bir ürün değil; tasarım estetiği, müzik, koku ve tat duyularının birleştiği sanatsal bir gastronomi deneyimi sunuyoruz.
-    `
+- **Espresso / Ristretto / Macchiato**
+  Seiste özel harmanı. Yoğun, gövdeli, fındık kreması bitişli.
+
+- **Cortado** — Çift shot ristretto, kadifemsi sıcak süt dengesi.
+- **Velvet Flat White** — İnce mikro köpük, çift shot ristretto.
+- **Signature Affogato** — Vanilyalı dondurma, sıcak espresso, %70 Madagaskar çikolatası.
+- **Velvet Mocha** — El yapımı bitter çikolata, double espresso, kadifemsi süt.`,
+
+    chocolates: `SEISTE EL YAPIMI GURME ÇİKOLATA SEÇKİSİ
+
+**Zanaatkar Trüfler & Tabletler**
+
+- **Gold Leaf Truffle** — %74 Madagaskar kakao, taze krema, 24K altın yaprağı.
+- **Belgian Sea Salt Truffle** — Tuzlu karamel dolgulu, deniz tuzu kristalleri.
+- **Pistachio Praline** — Kavrulmuş Antep fıstığı ezmesi, bitter çikolata kubbesi.
+- **Madagascar Origin Tablet** — %70 saf çikolata, narenciye ve odunsu asidite.
+
+**Gurme Tatlılar**
+
+- **Artisan Dome Dessert** — Fındıklı pralin, frambuaz jölesi, çikolata mus.
+- **Signature Hot Chocolate** — Eritilmiş Belçika çikolatası, organik krema, vanilya.
+- **Seiste Tarte** — Kakao sablesi, çikolatalı krem karamel, tuzlu tereyağı karameli.`,
+
+    location: `**Seiste Nişantaşı**
+Valikonağı Caddesi No: 42, Şişli / İstanbul
+Harbiye Metro — 5 dk yürüme mesafesi
+
+**İletişim**
+T: +90 (212) 555 45 45
+E: contact@seiste.com
+
+**Çalışma Saatleri**
+Pazartesi – Cuma: 09:00 – 23:00
+Cumartesi – Pazar: 09:00 – 00:00`,
+
+    story: `Seiste, nitelikli kahve kültürü ile el yapımı gurme çikolata sanatını bir araya getiren lüks bir gastronomi deneyimidir.
+
+Belçika çikolatası işleme tekniklerini, dünya üzerindeki özel mikro-lot kahve çiftliklerinden getirdiğimiz çekirdeklerle harmanlıyoruz.
+
+Nişantaşı şubemizde misafirlerimize sadece bir ürün değil; tasarım estetiği, müzik, koku ve tat duyularının birleştiği sanatsal bir deneyim sunuyoruz.`
   };
 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
-
-    // Check if it is the first interaction to change layout view
-    if (!hasStarted) {
-      setHasStarted(true);
-    }
+    if (!hasStarted) setHasStarted(true);
 
     const userMsg: Message = {
-      id: Math.random().toString(),
+      id: Date.now().toString() + Math.random(),
       sender: 'user',
       text: text,
       timestamp: new Date()
@@ -105,10 +117,8 @@ Seiste, nitelikli kahve kültürü ile el yapımı gurme çikolata sanatını ay
     setInputValue('');
     setIsTyping(true);
 
-    // Context Parsing
     const query = text.toLowerCase();
     
-    // Turkish name extraction regex patterns
     let detectedName = userName;
     const nameMatch = text.match(/(?:adım|ismim|adım\s+is|ismim\s+is)\s+([A-Za-zĞüşıöçĞÜŞİÖÇ]+)/i) || 
                       text.match(/(?:ben|ismim)\s+([A-Za-zĞüşıöçĞÜŞİÖÇ]+)(?:\s+yim|\s+yım|\s+yim|\s+yum|\s+yüm|\s+yim\b|\b)/i);
@@ -120,16 +130,15 @@ Seiste, nitelikli kahve kültürü ile el yapımı gurme çikolata sanatını ay
       }
     }
 
-    // Preference extraction
     let detectedPref = userPreference;
     if (query.includes('asidik') || query.includes('ekşi') || query.includes('meyvemsi') || query.includes('çiçeksi')) {
-      detectedPref = 'meyvemsi & yüksek asiditeli';
+      detectedPref = 'meyvemsi ve yüksek asiditeli';
       setUserPreference(detectedPref);
     } else if (query.includes('çikolata') || query.includes('yoğun') || query.includes('sert') || query.includes('koyu') || query.includes('acı')) {
-      detectedPref = 'yoğun & kakaolu';
+      detectedPref = 'yoğun kakaolu';
       setUserPreference(detectedPref);
     } else if (query.includes('karamel') || query.includes('yumuşak') || query.includes('sütlü') || query.includes('hafif')) {
-      detectedPref = 'yumuşak & karamelize';
+      detectedPref = 'yumuşak ve karamelize';
       setUserPreference(detectedPref);
     }
 
@@ -137,40 +146,32 @@ Seiste, nitelikli kahve kültürü ile el yapımı gurme çikolata sanatını ay
       let responseText = '';
       const namePrefix = detectedName ? `${detectedName} Bey, ` : '';
 
-      // Check if we are in the reservation / booking flow
       if (booking.step !== 'none') {
-        handleBookingFlow(text);
+        handleBookingFlow(text, detectedName);
         return;
       }
 
-      // General intelligent conversational routing
       if (query.includes('rezervasyon') || query.includes('masa') || query.includes('yer ayır')) {
         setBooking({ step: 'day' });
-        responseText = `Tabii ki ${namePrefix}size seveceğiniz bir masa ayıralım. Rezervasyonunuzu hangi gün için planlamak istersiniz? (Örnek: Cuma, Yarın veya 24 Mayıs)`;
+        responseText = `${namePrefix}Sizin için özel bir masa ayıralım.\n\nRezervasyon tarihini belirtir misiniz?`;
       } else if (query.includes('kahve') || query.includes('latte') || query.includes('espresso') || query.includes('demleme') || query.includes('içecek')) {
-        let prefInject = '';
-        if (detectedPref) {
-          prefInject = `Tercih ettiğiniz **${detectedPref}** aroma profili göz önüne alındığında, `;
-        }
-        responseText = `${menuDatabase.coffees}\n\n${prefInject}Seiste şefleri olarak özel eşleştirme tavsiyemiz:\n- **Panama Geisha** yanına %74 kakao içeren **Seiste Gold Leaf Truffle** trüfümüzün floral asiditeyi tamamlayan lüks dokusunu öneririz.\n- **Ethiopia Yirgacheffe V60** yanına, içindeki frambuaz jölesiyle mükemmel bir uyum yakalayan **Artisan Dome Dessert** tatlımızı denemelisiniz.`;
+        const prefInject = detectedPref ? `\n\nTercihiniz **${detectedPref}** profili doğrultusunda;` : '';
+        responseText = `${menuDatabase.coffees}${prefInject}\n\n**Sommelier Önerisi:** Panama Geisha yanına Gold Leaf Truffle, Ethiopia Yirgacheffe yanına Artisan Dome Dessert.`;
       } else if (query.includes('çikolata') || query.includes('truffle') || query.includes('trüf') || query.includes('tatlı') || query.includes('pasta')) {
-        let prefInject = '';
-        if (detectedPref) {
-          prefInject = `Sevdiğiniz **${detectedPref}** lezzetleri doğrultusunda, `;
-        }
-        responseText = `${menuDatabase.chocolates}\n\n${prefInject}Gurme çikolata ve tatlılarımız için kahve eşleştirme önerimiz:\n- İmza lezzetimiz **Seiste Gold Leaf Truffle** ile özel harmanımızdan çekilmiş double **Espresso** veya asil gövdeli **Panama Geisha**.\n- Ahududu jöleli **Artisan Dome Dessert** ile bergamot ve şeftali notaları içeren **Ethiopia Yirgacheffe V60** demlenmiş nitelikli kahvemiz.`;
+        const prefInject = detectedPref ? `\n\nTercihiniz **${detectedPref}** profili doğrultusunda;` : '';
+        responseText = `${menuDatabase.chocolates}${prefInject}\n\n**Sommelier Önerisi:** Gold Leaf Truffle ile double Espresso, Artisan Dome ile Ethiopia Yirgacheffe V60.`;
       } else if (query.includes('adres') || query.includes('nerede') || query.includes('konum') || query.includes('saat') || query.includes('açık') || query.includes('iletişim')) {
         responseText = `${namePrefix}${menuDatabase.location}`;
-      } else if (query.includes('hikaye') || query.includes('kimdir') || query.includes('hakkında') || query.includes('hakkında bilgi') || query.includes('seiste nedir')) {
+      } else if (query.includes('hikaye') || query.includes('kimdir') || query.includes('hakkında') || query.includes('seiste nedir')) {
         responseText = `${namePrefix}${menuDatabase.story}`;
       } else if (query.includes('selam') || query.includes('merhaba') || query.includes('günaydın')) {
-        responseText = `Merhaba ${namePrefix}Seiste lezzet dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım. Size nitelikli kahve seçkimiz, el yapımı Belçika çikolatalarımız veya masa rezervasyonu işlemleri hakkında detaylı bilgi verebilirim. Hangi konuda yardımcı olmamı istersiniz?`;
+        responseText = `Merhaba ${namePrefix}Seiste'ye hoş geldiniz.\n\nNitelikli kahve seçkimiz, el yapımı Belçika çikolatalarımız veya masa rezervasyonu hakkında yardımcı olabilirim.`;
       } else {
-        responseText = `Size bu konuda yardımcı olamadığım için üzgünüm ${namePrefix}ancak Seiste'nin el yapımı çikolata seçkisi, nitelikli kahve demlemeleri, Nişantaşı şubemizin konumu veya masa rezervasyonu süreçleri hakkında detaylı bilgi vermemi isterseniz memnuniyetle yardımcı olurum.`;
+        responseText = `${namePrefix}Bu konuda yardımcı olamadım, ancak nitelikli kahve demlemeleri, el yapımı çikolata seçkisi, konum bilgisi veya masa rezervasyonu hakkında detaylı bilgi sunabilirim.`;
       }
 
       const aiMsg: Message = {
-        id: Math.random().toString(),
+        id: Date.now().toString() + Math.random(),
         sender: 'ai',
         text: responseText,
         timestamp: new Date()
@@ -178,188 +179,246 @@ Seiste, nitelikli kahve kültürü ile el yapımı gurme çikolata sanatını ay
 
       setMessages((prev) => [...prev, aiMsg]);
       setIsTyping(false);
-    }, 1000);
+    }, 900);
   };
 
-  // Booking Flow Logic
-  const handleBookingFlow = (rawText: string) => {
+  const handleBookingFlow = (rawText: string, currentDetectedName: string | null) => {
     let nextResponse = '';
     let nextStep = booking.step;
-    let nextData = { ...booking };
-    const nameGreeting = userName ? `${userName} Bey ` : '';
+    const nextData = { ...booking };
+    const nameGreeting = currentDetectedName ? `${currentDetectedName} Bey, ` : '';
 
     if (booking.step === 'day') {
       nextData.day = rawText;
       nextStep = 'people';
-      nextResponse = `Anlaşıldı. ${nameGreeting}rezervasyonunuz kaç kişilik bir masa için olacak?`;
+      nextResponse = `${nameGreeting}Kaç kişilik bir masa hazırlayalım?`;
     } else if (booking.step === 'people') {
       nextData.people = rawText;
       nextStep = 'time';
-      nextResponse = `Teşekkürler. Saat kaç için yer ayıralım? ${nameGreeting}(Şubemiz 09:00 - 23:00 saatleri arasında hizmet vermektedir)`;
+      nextResponse = `Saat kaç için yer ayıralım?\nŞubemiz 09:00 – 23:00 arasında hizmet vermektedir.`;
     } else if (booking.step === 'time') {
       nextData.time = rawText;
       nextStep = 'name';
-      nextResponse = "Son olarak, rezervasyonunuzu onaylamak adına isim, soyisim ve telefon numaranızı belirtebilir misiniz?";
+      nextResponse = `Son olarak, isminizi ve telefon numaranızı belirtir misiniz?`;
     } else if (booking.step === 'name') {
       nextData.name = rawText;
       nextStep = 'none';
-      nextResponse = `Rezervasyon talebiniz başarıyla kaydedilmiştir.
-
-**Rezervasyon Detayları:**
-- **Konum**: Seiste Nişantaşı Şubesi
-- **Tarih**: ${nextData.day}
-- **Kişi Sayısı**: ${nextData.people} Kişi
-- **Saat**: ${nextData.time}
-- **İsim**: ${rawText}
-
-Sizi ağırlamayı sabırsızlıkla bekliyoruz ${nameGreeting}. Rezervasyon saatinde bir değişiklik olması durumunda +90 (212) 555 45 45 numaralı hattımızdan bizimle iletişime geçebilirsiniz.`;
+      nextResponse = `Rezervasyonunuz kaydedilmiştir.\n\n**Tarih:** ${nextData.day}\n**Kişi:** ${nextData.people}\n**Saat:** ${nextData.time}\n**İletişim:** ${rawText}\n\nDeğişiklik için: +90 (212) 555 45 45`;
     }
 
     setBooking({ ...nextData, step: nextStep });
 
     setTimeout(() => {
       const aiMsg: Message = {
-        id: Math.random().toString(),
+        id: Date.now().toString() + Math.random(),
         sender: 'ai',
         text: nextResponse,
         timestamp: new Date()
       };
       setMessages((prev) => [...prev, aiMsg]);
       setIsTyping(false);
-    }, 800);
+    }, 700);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSend(inputValue);
-    }
+    if (e.key === 'Enter') handleSend(inputValue);
   };
 
+  const renderFormattedText = (text: string) => {
+    return text.split('\n').map((line, lineIdx) => {
+      const parts = line.split(/(\*\*[^*]+\*\*)/g);
+      const content = parts.map((part, partIdx) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return (
+            <span key={partIdx} className="font-medium text-white/95">
+              {part.slice(2, -2)}
+            </span>
+          );
+        }
+        return part;
+      });
+
+      if (line.trim() === '') return <div key={lineIdx} className="h-3" />;
+
+      const isTitle = line === line.toUpperCase() && line.length > 5 && !line.startsWith('-') && !line.startsWith('*');
+
+      return (
+        <div 
+          key={lineIdx} 
+          className={`${
+            isTitle 
+              ? 'text-white/70 font-sans text-[10px] tracking-[0.2em] uppercase mt-4 mb-2 font-semibold' 
+              : line.startsWith('- ') || line.startsWith('  ')
+              ? 'ml-2 mb-0.5'
+              : 'mb-0.5'
+          }`}
+        >
+          {content}
+        </div>
+      );
+    });
+  };
+
+  const getContextChips = (): string[] => {
+    if (booking.step === 'day') return ['Bugün', 'Yarın', 'Cumartesi'];
+    if (booking.step === 'people') return ['2 Kişi', '4 Kişi', '6 Kişi'];
+    if (booking.step === 'time') return ['14:00', '17:00', '20:00'];
+    return ['Kahve Seçkisi', 'Çikolata', 'Rezervasyon', 'Konum'];
+  };
+
+  const chipToQuery: Record<string, string> = {
+    'Kahve Seçkisi': 'Kahve menünüzü gösterir misiniz?',
+    'Çikolata': 'Çikolata ve tatlı seçkileriniz nelerdir?',
+    'Rezervasyon': 'Masa rezervasyonu yapmak istiyorum.',
+    'Konum': 'Adresiniz ve çalışma saatleriniz nedir?',
+  };
+
+  const activeChips = getContextChips();
+
+  // Reservation stepper for sidebar
+  const bookingSteps = [
+    { key: 'day', label: 'Tarih' },
+    { key: 'people', label: 'Kişi' },
+    { key: 'time', label: 'Saat' },
+    { key: 'name', label: 'Bilgi' },
+  ];
+  const stepKeys = bookingSteps.map(s => s.key);
+  const currentStepIdx = stepKeys.indexOf(booking.step);
+
   return (
-    <div className="min-h-screen w-full bg-[#050302] text-white flex flex-col justify-between pt-24 pb-12 px-5 relative overflow-hidden">
-      
-      {/* Background Soft Chocolate Texture Glow — Brighter */}
-      <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[900px] h-[900px] bg-[#2a150d]/40 rounded-full blur-[160px] pointer-events-none z-0" />
+    <div className="min-h-screen w-full bg-transparent text-white flex flex-col pt-20 pb-16 px-5 md:px-12 relative overflow-hidden">
 
-      {/* Main Layout Area */}
-      <div className="flex-1 max-w-3xl w-full mx-auto flex flex-col justify-center relative z-10">
+      {/* Main Container */}
+      <div className="flex-1 max-w-5xl w-full mx-auto flex flex-col md:grid md:grid-cols-12 md:gap-10 relative z-10">
         
-        <AnimatePresence mode="wait">
-          {!hasStarted ? (
-            /* Home / Initial Splash State */
-            <motion.div
-              key="splash"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col items-center justify-center text-center gap-8 py-10"
-            >
-              {/* Wavy Abstract Logo */}
-              <div className="w-28 h-28 md:w-40 md:h-40 opacity-25">
-                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full text-white">
-                  <path d="M10 50C25 35 40 65 55 50C70 35 85 65 90 50" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
-                  <path d="M10 40C25 25 40 55 55 40C70 25 85 55 90 40" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.4" strokeLinecap="round"/>
-                  <path d="M10 60C25 45 40 75 55 60C70 45 85 75 90 60" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.2" strokeLinecap="round"/>
-                </svg>
-              </div>
+        {/* Left Sidebar — Visible only on desktop */}
+        <div className="hidden md:flex md:col-span-3 flex-col justify-between pt-4 pb-2">
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1">
+              <span className="text-[8px] font-sans tracking-[0.3em] text-white/30 uppercase font-semibold">
+                SEISTE
+              </span>
+              <h2 className="text-lg font-serif font-light tracking-[0.15em] text-white/80 uppercase">
+                Sommelier
+              </h2>
+            </div>
+            <p className="text-[10px] leading-relaxed text-white/30 font-light">
+              Nitelikli kahve, el yapımı Belçika çikolatası ve gurme eşleştirme danışmanlığı.
+            </p>
 
-              <div className="flex flex-col gap-2">
-                <h1 className="text-3xl md:text-6xl font-serif font-light tracking-widest leading-tight">
-                  SEISTE SOMMELIER
-                </h1>
-                <p className="text-[10px] md:text-xs font-sans tracking-[0.25em] text-white/40 uppercase mt-2">
-                  Nitelikli kahve ve çikolata danışmanınız
-                </p>
-              </div>
-
-              {/* Suggestion Buttons — Always Row, Always Side-by-Side */}
-              <div className="flex flex-row gap-2.5 justify-center items-center mt-4">
-                <button
-                  onClick={() => handleSend("Seiste hakkında bilgi verir misiniz?")}
-                  className="px-4 py-2 border border-white/15 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/90 bg-white/[0.02] hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
-                >
-                  Hikayemiz
-                </button>
-                <button
-                  onClick={() => handleSend("Kahve ve çikolata menünüzü gösterir misiniz?")}
-                  className="px-4 py-2 border border-white/15 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/90 bg-white/[0.02] hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
-                >
-                  Menü
-                </button>
-                <button
-                  onClick={() => handleSend("Masa rezervasyonu yapmak istiyorum")}
-                  className="px-4 py-2 border border-white/15 rounded-full text-[8px] sm:text-[9px] tracking-[0.18em] font-sans font-medium uppercase text-white/90 bg-white/[0.02] hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer whitespace-nowrap"
-                >
-                  Rezervasyon
-                </button>
-              </div>
-            </motion.div>
-          ) : (
-            /* Active Chat State */
-            <motion.div
-              key="chat"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              className="flex-1 flex flex-col justify-end h-[68vh] md:h-[72vh] py-4"
-            >
-              {/* Shrunk Header at Top of Chat Feed */}
-              <div className="flex justify-between items-center border-b border-white/5 pb-4 mb-4">
-                <span className="text-[10px] font-sans tracking-[0.2em] text-white/40 uppercase">Seiste Sommelier Danışmanı</span>
-                <button
-                  onClick={() => {
-                    setMessages([]);
-                    setHasStarted(false);
-                    setBooking({ step: 'none' });
-                  }}
-                  className="text-[9px] font-sans tracking-[0.2em] text-white/30 hover:text-white transition-colors uppercase cursor-pointer"
-                >
-                  Sohbeti Sıfırla
-                </button>
-              </div>
-
-              {/* Chat Message History */}
-              <div className="flex-1 overflow-y-auto pr-2 flex flex-col gap-6 scrollbar-thin scrollbar-thumb-white/5 scrollbar-track-transparent">
-                {messages.map((msg) => (
-                  <div
-                    key={msg.id}
-                    className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
-                  >
-                    <span className="text-[9px] font-sans tracking-[0.1em] text-white/20 mb-1">
-                      {msg.sender === 'user' ? 'Siz' : 'Seiste Sommelier'}
-                    </span>
-                    <div
-                      className={`max-w-[85%] px-5 py-4 rounded-[20px] text-xs md:text-[13px] leading-relaxed whitespace-pre-wrap ${
-                        msg.sender === 'user'
-                          ? 'bg-white/5 border border-white/10 text-white font-light rounded-tr-none'
-                          : 'bg-white/[0.02] border border-white/5 text-white/90 font-light rounded-tl-none'
-                      }`}
-                    >
-                      {msg.text}
+            {/* Reservation Stepper */}
+            <div className="flex flex-col gap-3 mt-4">
+              <span className="text-[8px] font-sans tracking-[0.25em] text-white/20 uppercase font-semibold">
+                Rezervasyon
+              </span>
+              <div className="flex flex-col gap-2.5 pl-0.5 relative">
+                <div className="absolute left-[5px] top-1.5 bottom-1.5 w-[1px] bg-white/5" />
+                {bookingSteps.map((s, idx) => {
+                  const isCompleted = (currentStepIdx > idx) || (booking.step === 'none' && booking.day !== undefined);
+                  const isActive = booking.step === s.key;
+                  return (
+                    <div key={s.key} className="flex items-center gap-3 relative z-10">
+                      <div className={`w-[9px] h-[9px] rounded-full border transition-all duration-300 ${
+                        isCompleted 
+                          ? 'bg-white/70 border-white/70' 
+                          : isActive 
+                          ? 'bg-transparent border-white/60' 
+                          : 'bg-transparent border-white/10'
+                      }`} />
+                      <span className={`text-[9px] font-sans tracking-[0.15em] transition-colors duration-300 ${
+                        isCompleted ? 'text-white/60' : isActive ? 'text-white/80 font-medium' : 'text-white/15'
+                      }`}>
+                        {s.label}
+                      </span>
                     </div>
-                  </div>
-                ))}
-
-                {isTyping && (
-                  <div className="flex flex-col items-start">
-                    <span className="text-[9px] font-sans tracking-[0.1em] text-white/20 mb-1">Seiste Sommelier</span>
-                    <div className="bg-white/[0.02] border border-white/5 px-5 py-4 rounded-[20px] rounded-tl-none flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse" style={{ animationDelay: '150ms' }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 animate-pulse" style={{ animationDelay: '300ms' }} />
-                    </div>
-                  </div>
-                )}
-                <div ref={chatEndRef} />
+                  );
+                })}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
 
-        {/* Input Bar Section */}
-        <div className="mt-6">
-          <div className="relative flex items-center h-14 rounded-full bg-black/35 border border-white/5 focus-within:border-white/10 transition-colors shadow-xl">
+          {/* Bottom */}
+          <div className="flex flex-col gap-1 border-t border-white/5 pt-4">
+            <span className="text-[7px] font-sans tracking-[0.2em] text-white/15 uppercase">Nişantaşı</span>
+            <span className="text-[8px] font-sans text-white/25 tracking-wider">Valikonağı Cad. No: 42</span>
+          </div>
+        </div>
+
+        {/* Right Column: Chat */}
+        <div className="md:col-span-9 flex flex-col justify-between min-h-[calc(100vh-9rem)]">
+          
+          {/* Chat Header */}
+          <div className="flex justify-between items-center border-b border-white/5 pb-3 mb-5">
+            <span className="text-[9px] font-sans tracking-[0.2em] text-white/25 uppercase">Dijital Sommelier</span>
+            <button
+              onClick={() => {
+                setMessages([{
+                  id: 'welcome',
+                  sender: 'ai',
+                  text: 'Seiste dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım.\n\nNitelikli kahve seçkilerimiz, el yapımı Belçika çikolatalarımız veya masa rezervasyonu hakkında yardımcı olabilirim.',
+                  timestamp: new Date()
+                }]);
+                setBooking({ step: 'none' });
+              }}
+              className="text-[8px] font-sans tracking-[0.2em] text-white/20 hover:text-white/60 transition-colors uppercase cursor-pointer"
+            >
+              Sıfırla
+            </button>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-4 scrollbar-thin scrollbar-thumb-white/5 scrollbar-track-transparent">
+            <AnimatePresence initial={false}>
+              {messages.map((msg) => (
+                <motion.div
+                  key={msg.id}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                  className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
+                >
+                  <span className="text-[7px] font-sans tracking-[0.12em] text-white/15 mb-1 uppercase">
+                    {msg.sender === 'user' ? 'Siz' : 'Sommelier'}
+                  </span>
+                  <div className={`max-w-[80%] md:max-w-[75%] px-5 py-4 text-[11px] md:text-xs leading-relaxed ${
+                    msg.sender === 'user'
+                      ? 'bg-white/[0.04] border border-white/8 text-white/90 font-light rounded-[16px] rounded-tr-sm'
+                      : 'bg-white/[0.02] border border-white/5 text-white/70 font-light rounded-[16px] rounded-tl-sm'
+                  }`}>
+                    {msg.sender === 'ai' ? renderFormattedText(msg.text) : msg.text}
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+
+            {isTyping && (
+              <div className="flex flex-col items-start">
+                <span className="text-[7px] font-sans tracking-[0.12em] text-white/15 mb-1 uppercase">Sommelier</span>
+                <div className="bg-white/[0.02] border border-white/5 px-5 py-4 rounded-[16px] rounded-tl-sm flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-white/30 animate-pulse" />
+                  <span className="w-1 h-1 rounded-full bg-white/30 animate-pulse" style={{ animationDelay: '200ms' }} />
+                  <span className="w-1 h-1 rounded-full bg-white/30 animate-pulse" style={{ animationDelay: '400ms' }} />
+                </div>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          {/* Quick Chips */}
+          <div className="flex flex-wrap gap-1.5 mt-4 mb-3">
+            {activeChips.map((chip) => (
+              <button
+                key={chip}
+                onClick={() => handleSend(chipToQuery[chip] || chip)}
+                className="border border-white/8 text-white/35 hover:text-white/70 hover:border-white/15 text-[8px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full transition-all duration-300 bg-transparent cursor-pointer"
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
+
+          {/* Input Bar */}
+          <div className="relative flex items-center h-12 rounded-full bg-white/[0.02] border border-white/5 focus-within:border-white/10 transition-colors">
             <input
               ref={inputRef}
               type="text"
@@ -368,19 +427,21 @@ Sizi ağırlamayı sabırsızlıkla bekliyoruz ${nameGreeting}. Rezervasyon saat
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyPress}
               disabled={isTyping}
-              className="w-full h-full bg-transparent border-none rounded-full px-6 text-xs md:text-[13px] text-white placeholder-white/20 focus:outline-none"
+              className="w-full h-full bg-transparent border-none rounded-full px-6 text-xs text-white placeholder-white/15 focus:outline-none"
             />
             <button
               onClick={() => handleSend(inputValue)}
               disabled={isTyping || !inputValue.trim()}
-              className="absolute right-4 text-[10px] font-sans tracking-[0.15em] text-white/40 hover:text-white disabled:text-white/10 disabled:pointer-events-none transition-colors cursor-pointer"
+              className="absolute right-5 text-[9px] font-sans tracking-[0.15em] text-white/30 hover:text-white/70 disabled:text-white/10 disabled:pointer-events-none transition-colors cursor-pointer uppercase"
             >
-              GÖNDER
+              Gönder
             </button>
           </div>
-          <p className="text-[9px] text-center text-white/25 mt-3 tracking-wider leading-relaxed">
-            Seiste Dijital Concierge hizmetidir. Yapay zeka tavsiyeleri gurme sommelier bilgileriyle hazırlanmıştır.
+
+          <p className="text-[7px] text-center text-white/15 mt-2 tracking-widest">
+            Seiste Dijital Concierge · Sommelier bilgileriyle hazırlanmıştır
           </p>
+
         </div>
 
       </div>

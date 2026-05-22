@@ -49,19 +49,19 @@ export default function App() {
         setMenuOpen={setMenuOpen} 
       />
 
-      {/* View Routing with Framer Motion slide/fade animations */}
+      {/* View Routing — fast crossfade, no mode="wait" stutter */}
       <div className="w-full min-h-screen relative z-10">
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {currentView === 'home' && (
             <motion.div
               key="home-view"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="w-full min-h-screen"
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
-              <Home onNavigate={handleNavigate} />
+              <Home />
             </motion.div>
           )}
 
@@ -71,8 +71,8 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="w-full min-h-screen"
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
               <AIChat key="ai-active" initialHasStarted={true} />
             </motion.div>
@@ -84,8 +84,8 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="w-full min-h-screen"
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
               <About onNavigate={handleNavigate} />
             </motion.div>
@@ -97,8 +97,8 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="w-full min-h-screen"
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
               <Contact />
             </motion.div>
