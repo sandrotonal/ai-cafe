@@ -54,6 +54,6 @@ Valikonağı Caddesi No: 42, Şişli
 ---
 
 <div align="center">
-  Proudly developed by <strong>Sandro Tonal</strong>
+  Proudly developed by <strong>gucluyumhe</strong>
 </div>
 
