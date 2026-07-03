@@ -221,8 +221,7 @@ function detectIntent(query: string): IntentResult {
 // ---------- RESPONSE GENERATOR ----------
 function generateResponse(
   intent: IntentResult,
-  profile: UserProfile,
-  originalQuery: string
+  profile: UserProfile
 ): { text: string; category: Message['category'] } {
   const name = profile.name;
   const greeting = name ? `${name} Bey, ` : '';
@@ -472,7 +471,7 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
         setProfile(updatedProfile);
       }
 
-      const response = generateResponse(intent, updatedProfile, text);
+      const response = generateResponse(intent, updatedProfile);
 
       const aiMsg: Message = {
         id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
