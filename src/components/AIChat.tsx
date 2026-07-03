@@ -230,7 +230,7 @@ function generateResponse(
   switch (intent.intent) {
     case 'greeting': {
       const greetings = [
-        `Merhaba${name ? ` ${name} Bey` : ''}! Seiste dijital sommelier'iniz olarak hizmetinizde.\n\nSize nasıl yardımcı olabilirim?\n\n☕ Nitelikli kahve seçkimiz\n🍫 El yapımı Belçika çikolatalarımız\n📋 Masa rezervasyonu\n📍 Konum ve çalışma saatleri`,
+        `Merhaba${name ? ` ${name} Bey` : ''}! Seiste dijital sommelier'iniz olarak hizmetinizde.\n\nSize nasıl yardımcı olabilirim?\n\n- Nitelikli kahve seçkimiz\n- El yapımı Belçika çikolatalarımız\n- Masa rezervasyonu\n- Konum ve çalışma saatleri`,
         `Hoş geldiniz${name ? ` ${name} Bey` : ''}! Ben Seiste'nin dijital sommelier'i.\n\nBugün sizin için ne hazırlayayım? Merak ettiğiniz her konuda buradayım.`,
       ];
       return { text: greetings[Math.floor(Math.random() * greetings.length)], category: 'greeting' };
@@ -238,36 +238,36 @@ function generateResponse(
 
     case 'thanks': {
       return {
-        text: `${greeting}Teşekkür ederim, sizinle sohbet etmek keyifliydi! 🙏\n\nSeiste'de görüşmek dileğiyle. Her zaman buradayım.`,
+        text: `${greeting}Teşekkür ederim, sizinle sohbet etmek keyifliydi!\n\nSeiste'de görüşmek dileğiyle. Her zaman buradayım.`,
         category: 'greeting',
       };
     }
 
     case 'booking':
       return {
-        text: `${greeting}Sizin için özel bir masa hazırlayalım. ✨\n\nRezervasyon tarihini belirtir misiniz?\n\n*Örn: "Yarın", "Cumartesi", "5 Temmuz"*`,
+        text: `${greeting}Sizin için özel bir masa hazırlayalım.\n\nRezervasyon tarihini belirtir misiniz?\n\n*Örn: "Yarın", "Cumartesi", "5 Temmuz"*`,
         category: 'booking',
       };
 
     case 'coffee_menu': {
-      const prefNote = pref ? `\n\n🎯 **Tercih profiliniz:** ${pref} — bu doğrultuda özellikle **${pref === 'meyvemsi ve yüksek asiditeli' ? 'Ethiopia Yirgacheffe ve Panama Geisha' : pref === 'yoğun kakaolu' ? 'Velvet Mocha ve Espresso' : 'Cortado ve Velvet Flat White'}** öneriyorum.` : '';
+      const prefNote = pref ? `\n\n**Tercih profiliniz:** ${pref} — bu doğrultuda özellikle **${pref === 'meyvemsi ve yüksek asiditeli' ? 'Ethiopia Yirgacheffe ve Panama Geisha' : pref === 'yoğun kakaolu' ? 'Velvet Mocha ve Espresso' : 'Cortado ve Velvet Flat White'}** öneriyorum.` : '';
       return {
-        text: `${menuDatabase.coffees}${prefNote}\n\n💡 **Sommelier İpucu:** Her demleme yöntemi farklı aroma profili ortaya çıkarır. V60 temiz ve parlak, Chemex ise daha yuvarlak ve gövdeli bir fincan sunar.`,
+        text: `${menuDatabase.coffees}${prefNote}\n\n**Sommelier İpucu:** Her demleme yöntemi farklı aroma profili ortaya çıkarır. V60 temiz ve parlak, Chemex ise daha yuvarlak ve gövdeli bir fincan sunar.`,
         category: 'menu',
       };
     }
 
     case 'chocolate_menu': {
-      const prefNote = pref ? `\n\n🎯 **Tercih profiliniz:** ${pref} — bu doğrultuda özellikle **${pref === 'yoğun kakaolu' ? 'Gold Leaf Truffle ve Madagascar Tablet' : pref === 'yumuşak ve karamelize' ? 'Belgian Sea Salt Truffle ve Seiste Tarte' : 'Artisan Dome Dessert'}** öneriyorum.` : '';
+      const prefNote = pref ? `\n\n**Tercih profiliniz:** ${pref} — bu doğrultuda özellikle **${pref === 'yoğun kakaolu' ? 'Gold Leaf Truffle ve Madagascar Tablet' : pref === 'yumuşak ve karamelize' ? 'Belgian Sea Salt Truffle ve Seiste Tarte' : 'Artisan Dome Dessert'}** öneriyorum.` : '';
       return {
-        text: `${menuDatabase.chocolates}${prefNote}\n\n💡 **Sommelier İpucu:** Çikolatalarımız günlük taze üretilir ve %100 saf kakao yağı kullanılır. En iyi tadım deneyimi için çikolatanızı oda sıcaklığında tüketmenizi öneririz.`,
+        text: `${menuDatabase.chocolates}${prefNote}\n\n**Sommelier İpucu:** Çikolatalarımız günlük taze üretilir ve %100 saf kakao yağı kullanılır. En iyi tadım deneyimi için çikolatanızı oda sıcaklığında tüketmenizi öneririz.`,
         category: 'menu',
       };
     }
 
     case 'full_menu':
       return {
-        text: `${greeting}İşte Seiste'nin tam menüsü:\n\n${menuDatabase.coffees}\n\n---\n\n${menuDatabase.chocolates}\n\n💡 Belirli bir ürün hakkında detay veya eşleştirme önerisi ister misiniz?`,
+        text: `${greeting}İşte Seiste'nin tam menüsü:\n\n${menuDatabase.coffees}\n\n---\n\n${menuDatabase.chocolates}\n\n**Sommelier İpucu:** Belirli bir ürün hakkında detay veya eşleştirme önerisi ister misiniz?`,
         category: 'menu',
       };
 
@@ -275,34 +275,34 @@ function generateResponse(
       const randomPair = menuDatabase.pairings[Math.floor(Math.random() * menuDatabase.pairings.length)];
       const prefBasedRecommendation = pref
         ? pref === 'meyvemsi ve yüksek asiditeli'
-          ? '\n\n🎯 **Sizin profilinize özel:** Ethiopia Yirgacheffe V60 + Artisan Dome Dessert — meyvemsi asidite ve frambuaz jölesinin uyumu.'
+          ? '\n\n**Sizin profilinize özel:** Ethiopia Yirgacheffe V60 + Artisan Dome Dessert — meyvemsi asidite ve frambuaz jölesinin uyumu.'
           : pref === 'yoğun kakaolu'
-          ? '\n\n🎯 **Sizin profilinize özel:** Double Espresso + Gold Leaf Truffle — yoğun kakao ve espressonun gövdeli buluşması.'
-          : '\n\n🎯 **Sizin profilinize özel:** Cortado + Seiste Tarte — kadifemsi süt dengesi ve karamel tatlılığı.'
+          ? '\n\n**Sizin profilinize özel:** Double Espresso + Gold Leaf Truffle — yoğun kakao ve espressonun gövdeli buluşması.'
+          : '\n\n**Sizin profilinize özel:** Cortado + Seiste Tarte — kadifemsi süt dengesi ve karamel tatlılığı.'
         : '';
 
       return {
-        text: `${greeting}Sommelier seçkimden bir eşleştirme:\n\n☕ **${randomPair.coffee}**\n🍫 × **${randomPair.chocolate}**\n\n${randomPair.reason}${prefBasedRecommendation}\n\n🔄 Başka bir eşleştirme görmek ister misiniz? "Başka öneri" yazmanız yeterli.`,
+        text: `${greeting}Sommelier seçkimden bir eşleştirme:\n\n**${randomPair.coffee}**\n* ${randomPair.chocolate}\n\n${randomPair.reason}${prefBasedRecommendation}\n\nBaşka bir eşleştirme görmek ister misiniz? "Başka öneri" yazmanız yeterli.`,
         category: 'pairing',
       };
     }
 
     case 'location':
       return {
-        text: `${greeting}${menuDatabase.location}\n\n🗺️ **Ulaşım:** Harbiye Metro İstasyonu'ndan çıkış sonrası Valikonağı Caddesi yönünde 5 dakika yürüyüş mesafesindeyiz.`,
+        text: `${greeting}${menuDatabase.location}\n\n**Ulaşım:** Harbiye Metro İstasyonu'ndan çıkış sonrası Valikonağı Caddesi yönünde 5 dakika yürüyüş mesafesindeyiz.`,
         category: 'info',
       };
 
     case 'story':
       return {
-        text: `${greeting}${menuDatabase.story}\n\n🏆 **Fark yaratan detaylarımız:**\n• SCA 85+ puanlı mikro-lot çekirdekler\n• %100 kakao yağı, katkısız üretim\n• Cam bölmeli açık atölyede günlük taze üretim\n• Sürdürülebilir tarım sertifikalı tedarik`,
+        text: `${greeting}${menuDatabase.story}\n\n**Fark yaratan detaylarımız:**\n• SCA 85+ puanlı mikro-lot çekirdekler\n• %100 kakao yağı, katkısız üretim\n• Cam bölmeli açık atölyede günlük taze üretim\n• Sürdürülebilir tarım sertifikalı tedarik`,
         category: 'info',
       };
 
     case 'brewing': {
       const tips = Object.values(menuDatabase.brewingTips).join('\n\n');
       return {
-        text: `${greeting}Demleme tekniklerimiz hakkında bilgi:\n\n${tips}\n\n💡 **Pro İpucu:** Su kalitesi kahvenin %98'ini oluşturur. Filtre su kullanmanızı kesinlikle öneriyoruz. Kavurma tarihinden itibaren 7-21 gün arası en ideal demleme penceresidir.`,
+        text: `${greeting}Demleme tekniklerimiz hakkında bilgi:\n\n${tips}\n\n**Pro İpucu:** Su kalitesi kahvenin %98'ini oluşturur. Filtre su kullanmanızı kesinlikle öneriyoruz. Kavurma tarihinden itibaren 7-21 gün arası en ideal demleme penceresidir.`,
         category: 'info',
       };
     }
@@ -315,13 +315,13 @@ function generateResponse(
 
     case 'faq_vegan': return { text: `${greeting}${menuDatabase.faq.vegan}`, category: 'info' };
     case 'faq_gluten': return { text: `${greeting}${menuDatabase.faq.glutenFree}`, category: 'info' };
-    case 'faq_allergen': return { text: `${greeting}${menuDatabase.faq.allergen}\n\n⚠️ **Önemli:** Alerjen bilgileri tavsiye niteliğindedir. Kesin bilgi için fiziksel şubemizle iletişime geçin.`, category: 'info' };
+    case 'faq_allergen': return { text: `${greeting}${menuDatabase.faq.allergen}\n\n**Önemli:** Alerjen bilgileri tavsiye niteliğindedir. Kesin bilgi için fiziksel şubemizle iletişime geçin.`, category: 'info' };
     case 'faq_wifi': return { text: `${greeting}${menuDatabase.faq.wifi}`, category: 'info' };
     case 'faq_parking': return { text: `${greeting}${menuDatabase.faq.parking}`, category: 'info' };
-    case 'faq_dog': return { text: `${greeting}${menuDatabase.faq.dogFriendly} 🐾`, category: 'info' };
+    case 'faq_dog': return { text: `${greeting}${menuDatabase.faq.dogFriendly}`, category: 'info' };
     case 'faq_delivery': return { text: `${greeting}${menuDatabase.faq.delivery}`, category: 'info' };
-    case 'faq_workshop': return { text: `${greeting}${menuDatabase.faq.workshop}\n\n🎓 Atölyelerimizde çikolata temperleme, truffle yapımı ve kahve cupping gibi konularda uygulamalı eğitimler sunuyoruz.`, category: 'info' };
-    case 'faq_event': return { text: `${greeting}${menuDatabase.faq.privateEvent}\n\n🥂 Doğum günleri, yıldönümleri ve kurumsal etkinlikler için özel menü ve dekorasyon seçeneklerimiz mevcuttur.`, category: 'info' };
+    case 'faq_workshop': return { text: `${greeting}${menuDatabase.faq.workshop}\n\nAtölyelerimizde çikolata temperleme, truffle yapımı ve kahve cupping gibi konularda uygulamalı eğitimler sunuyoruz.`, category: 'info' };
+    case 'faq_event': return { text: `${greeting}${menuDatabase.faq.privateEvent}\n\nDoğum günleri, yıldönümleri ve kurumsal etkinlikler için özel menu ve dekorasyon seçeneklerimiz mevcuttur.`, category: 'info' };
 
     default: {
       // Smarter fallback with context awareness
@@ -330,7 +330,7 @@ function generateResponse(
         : '';
 
       return {
-        text: `${greeting}Bu konuda size daha iyi yardımcı olabilmem için birkaç önerim var:\n\n☕ **"Kahve menüsü"** — Nitelikli kahve seçkimiz\n🍫 **"Çikolata"** — El yapımı trüf ve tabletler\n🎯 **"Bana bir şey öner"** — Sommelier eşleştirme\n📋 **"Rezervasyon"** — Masa ayırtma\n📍 **"Konum"** — Adres ve çalışma saatleri\n❓ **"WiFi / Otopark / Vegan"** — Sık sorulanlar${suggestions}`,
+        text: `${greeting}Bu konuda size daha iyi yardımcı olabilmem için birkaç önerim var:\n\n- **"Kahve menüsü"** — Nitelikli kahve seçkimiz\n- **"Çikolata"** — El yapımı trüf ve tabletler\n- **"Bana bir şey öner"** — Sommelier eşleştirme\n- **"Rezervasyon"** — Masa ayırtma\n- **"Konum"** — Adres ve çalışma saatleri\n- **"WiFi / Otopark / Vegan"** — Sık sorulanlar${suggestions}`,
         category: 'general',
       };
     }
@@ -352,7 +352,7 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
     return [{
       id: 'welcome',
       sender: 'ai',
-      text: 'Seiste dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım. ✨\n\nSize nasıl yardımcı olabilirim?\n\n☕ Nitelikli kahve seçkimiz\n🍫 El yapımı Belçika çikolatalarımız\n🎯 Kişisel eşleştirme önerisi\n📋 Masa rezervasyonu\n📍 Konum ve çalışma saatleri',
+      text: 'Seiste dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım.\n\nSize nasıl yardımcı olabilirim?\n\n- Nitelikli kahve seçkimiz\n- El yapımı Belçika çikolatalarımız\n- Kişisel eşleştirme önerisi\n- Masa rezervasyonu\n- Konum ve çalışma saatleri',
       timestamp: new Date(),
       category: 'greeting',
     }];
@@ -499,7 +499,7 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
     } else if (booking.step === 'people') {
       nextData.people = rawText;
       nextStep = 'time';
-      nextResponse = `Saat kaç için yer ayıralım?\n\n⏰ **Çalışma saatlerimiz:**\nPazartesi – Cuma: 09:00 – 23:00\nCumartesi – Pazar: 09:00 – 00:00`;
+      nextResponse = `Saat kaç için yer ayıralım?\n\n**Çalışma saatlerimiz:**\nPazartesi – Cuma: 09:00 – 23:00\nCumartesi – Pazar: 09:00 – 00:00`;
     } else if (booking.step === 'time') {
       nextData.time = rawText;
       nextStep = 'name';
@@ -507,7 +507,7 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
     } else if (booking.step === 'name') {
       nextData.name = rawText;
       nextStep = 'none';
-      nextResponse = `✅ Rezervasyonunuz kaydedilmiştir!\n\n📅 **Tarih:** ${nextData.day}\n👥 **Kişi:** ${nextData.people}\n⏰ **Saat:** ${nextData.time}\n📱 **İletişim:** ${rawText}\n\n📞 Değişiklik veya iptal için: **+90 (212) 555 45 45**\n\n_Not: Bu bilgilendirme amaçlıdır. Kesin onay için ekibimiz sizinle iletişime geçecektir._`;
+      nextResponse = `Rezervasyonunuz kaydedilmiştir!\n\n**Tarih:** ${nextData.day}\n**Kişi:** ${nextData.people}\n**Saat:** ${nextData.time}\n**İletişim:** ${rawText}\n\nDeğişiklik veya iptal için: **+90 (212) 555 45 45**\n\n_Not: Bu bilgilendirme amaçlıdır. Kesin onay için ekibimiz sizinle iletişime geçecektir._`;
     }
 
     setBooking({ ...nextData, step: nextStep });
@@ -555,7 +555,6 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
 
       const isTitle = line === line.toUpperCase() && line.length > 5 && !line.startsWith('-') && !line.startsWith('*') && !line.startsWith('•');
       const isBullet = line.trimStart().startsWith('•') || line.trimStart().startsWith('-');
-      const isEmoji = /^[☕🍫📋📍🎯💡🗺️🏆⚠️🎓🥂🐾🔄⏰📅👥📱📞✅❓]/.test(line.trimStart());
 
       return (
         <div
@@ -565,8 +564,6 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
               ? 'text-white/70 font-sans text-[10px] tracking-[0.2em] uppercase mt-4 mb-2 font-semibold'
               : isBullet
               ? 'ml-1 mb-1 text-white/50'
-              : isEmoji
-              ? 'mb-1'
               : line.startsWith('  ')
               ? 'ml-3 mb-0.5'
               : 'mb-0.5'
@@ -611,7 +608,7 @@ export default function AIChat({ initialHasStarted }: AIChatProps) {
     setMessages([{
       id: 'welcome',
       sender: 'ai',
-      text: 'Seiste dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım. ✨\n\nSize nasıl yardımcı olabilirim?\n\n☕ Nitelikli kahve seçkimiz\n🍫 El yapımı Belçika çikolatalarımız\n🎯 Kişisel eşleştirme önerisi\n📋 Masa rezervasyonu\n📍 Konum ve çalışma saatleri',
+      text: 'Seiste dünyasına hoş geldiniz. Ben dijital sommelier asistanınızım.\n\nSize nasıl yardımcı olabilirim?\n\n- Nitelikli kahve seçkimiz\n- El yapımı Belçika çikolatalarımız\n- Kişisel eşleştirme önerisi\n- Masa rezervasyonu\n- Konum ve çalışma saatleri',
       timestamp: new Date(),
       category: 'greeting',
     }]);
