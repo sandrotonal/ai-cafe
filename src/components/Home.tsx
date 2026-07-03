@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Home() {
+type ViewType = 'home' | 'menu' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms';
+
+interface HomeProps {
+  onNavigate: (view: ViewType) => void;
+}
+
+export default function Home({ onNavigate }: HomeProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
@@ -77,6 +83,22 @@ export default function Home() {
             <p className="text-[10px] md:text-xs font-sans text-white/35 tracking-wider max-w-sm font-light mt-1">
               {slides[currentSlide].desc}
             </p>
+
+            {/* CTA Buttons — Desktop Only */}
+            <div className="hidden md:flex items-center gap-3 mt-6">
+              <button
+                onClick={() => onNavigate('menu')}
+                className="px-7 py-2.5 rounded-full border border-white/30 text-[9px] font-sans tracking-[0.2em] uppercase text-white bg-white/[0.04] hover:bg-white hover:text-black hover:border-white transition-all duration-500 cursor-pointer backdrop-blur-sm"
+              >
+                Menüyü Keşfet
+              </button>
+              <button
+                onClick={() => onNavigate('ai')}
+                className="px-7 py-2.5 rounded-full border border-white/10 text-[9px] font-sans tracking-[0.2em] uppercase text-white/60 bg-transparent hover:text-white hover:border-white/30 transition-all duration-500 cursor-pointer"
+              >
+                Rezervasyon
+              </button>
+            </div>
           </motion.div>
         </div>
 

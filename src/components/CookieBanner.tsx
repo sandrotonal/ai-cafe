@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CookieBannerProps {
-  onNavigate: (view: 'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms') => void;
+  onNavigate: (view: 'home' | 'menu' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms') => void;
 }
 
 export default function CookieBanner({ onNavigate }: CookieBannerProps) {

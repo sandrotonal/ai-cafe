@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa6';
 
-type ViewType = 'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms';
+type ViewType = 'home' | 'menu' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms' | 'blog' | 'gallery' | 'faq' | 'testimonials';
 
 interface NavbarProps {
   currentView: ViewType;
@@ -42,6 +42,22 @@ export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen 
 
           {/* Center Links */}
           <div className="flex gap-6 md:gap-8 items-center">
+            <button
+              onClick={() => handleItemClick('menu')}
+              className={`text-[10px] font-sans tracking-[0.25em] font-medium transition-all duration-300 relative py-1 cursor-pointer ${
+                currentView === 'menu' ? 'text-white font-semibold' : 'text-white/40 hover:text-white/80'
+              }`}
+            >
+              MENÜ
+              {currentView === 'menu' && (
+                <motion.div 
+                  layoutId="activeDot"
+                  className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-white"
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                />
+              )}
+            </button>
+
             <button
               onClick={() => handleItemClick('ai')}
               className={`text-[10px] font-sans tracking-[0.25em] font-medium transition-all duration-300 relative py-1 cursor-pointer ${
@@ -120,7 +136,7 @@ export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen 
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 15, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-              className="w-[90%] max-w-[400px] h-[520px] p-10 rounded-[32px] bg-black/30 border border-white/5 flex flex-col justify-between shadow-2xl relative"
+              className="w-[90%] max-w-[400px] h-[640px] p-8 md:p-10 rounded-[32px] bg-black/30 border border-white/5 flex flex-col justify-between shadow-2xl relative overflow-y-auto scrollbar-none"
             >
               {/* Close Button Inside Menu */}
               <button
@@ -145,6 +161,14 @@ export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen 
                     HOME
                   </button>
                   <button
+                    onClick={() => handleItemClick('menu')}
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'menu' ? 'text-white font-semibold' : 'text-white/45'
+                    }`}
+                  >
+                    MENÜ
+                  </button>
+                  <button
                     onClick={() => handleItemClick('ai')}
                     className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
                       currentView === 'ai' ? 'text-white font-semibold' : 'text-white/45'
@@ -167,6 +191,38 @@ export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen 
                     }`}
                   >
                     CONTACT
+                  </button>
+                  <button
+                    onClick={() => handleItemClick('blog')}
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'blog' ? 'text-white font-semibold' : 'text-white/45'
+                    }`}
+                  >
+                    BLOG & HİKAYELER
+                  </button>
+                  <button
+                    onClick={() => handleItemClick('gallery')}
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'gallery' ? 'text-white font-semibold' : 'text-white/45'
+                    }`}
+                  >
+                    GALERİ
+                  </button>
+                  <button
+                    onClick={() => handleItemClick('testimonials')}
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'testimonials' ? 'text-white font-semibold' : 'text-white/45'
+                    }`}
+                  >
+                    YORUMLAR
+                  </button>
+                  <button
+                    onClick={() => handleItemClick('faq')}
+                    className={`text-sm font-sans tracking-[0.25em] uppercase hover:text-white text-left transition-colors cursor-pointer ${
+                      currentView === 'faq' ? 'text-white font-semibold' : 'text-white/45'
+                    }`}
+                  >
+                    SSS / FAQ
                   </button>
 
                   {/* Decorative divider line for legal texts */}
@@ -202,13 +258,13 @@ export default function Navbar({ currentView, onNavigate, menuOpen, setMenuOpen 
                 <div className="flex justify-between items-center border-t border-white/5 pt-6 mt-2">
                   <span className="text-[8px] font-sans tracking-[0.2em] text-white/35 uppercase">TAKİP EDİN</span>
                   <div className="flex gap-5 items-center text-white/45">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Instagram">
+                    <a href="https://instagram.com/seistecafe" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Instagram" aria-label="Seiste Instagram">
                       <FaInstagram size={14} />
                     </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Twitter/X">
+                    <a href="https://twitter.com/seistecafe" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Twitter/X" aria-label="Seiste Twitter">
                       <FaTwitter size={14} />
                     </a>
-                    <a href="mailto:contact@seiste.com" className="hover:text-white transition-colors" title="Email">
+                    <a href="mailto:contact@seiste.com" className="hover:text-white transition-colors" title="Email" aria-label="Email Gönder">
                       <FaEnvelope size={14} />
                     </a>
                   </div>
