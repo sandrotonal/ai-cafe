@@ -1,4 +1,4 @@
-# ☕ SEISTE CAFE - AI Concierge Gastronomy
+#  SEISTE CAFE - AI Concierge Gastronomy
 
 <div align="center">
   <img src="./public/images/cafe_interior.png" alt="Seiste Cafe" width="100%" style="border-radius: 10px; margin-bottom: 20px;" />
@@ -7,21 +7,21 @@
 
 ---
 
-## 📖 Proje Hakkında
+##  Proje Hakkında
 
 **Seiste Cafe & Restaurant**, Nişantaşı'nın kalbinde yer alan, butik kahve deneyimini ve zanaatkar çikolata sanatını dijital bir platforma dönüştüren premium bir web uygulamasıdır. Sadece bir tanıtım sitesi değil, aynı zamanda misafirlere özel bir **AI Sommelier (Yapay Zeka Dijital Concierge)** hizmeti ve gelişmiş lokal SEO entegrasyonu sunan interaktif bir gastronomi alanıdır.
 
 ---
 
-## ✨ Sprint 1 & 2 Geliştirmeleri
+##  Sprint 1 & 2 Geliştirmeleri
 
-### 🚀 1. Teknik SEO & Tarayıcı Performansı (Sprint 1)
+###  1. Teknik SEO & Tarayıcı Performansı (Sprint 1)
 - **JSON-LD Schema Markup:** Google ve diğer arama motorları için `CafeOrCoffeeShop` şeması dinamik olarak `index.html`'e eklendi.
 - **Open Graph & Twitter Cards:** WhatsApp, Facebook, LinkedIn ve Twitter gibi platformlarda zengin paylaşım önizlemesi (meta tags) eklendi.
 - **Sitemap & Robots:** `sitemap.xml` ve `robots.txt` tarama optimizasyonu amacıyla oluşturuldu.
 - **Font preconnect & Preload:** Google Fonts yükleme performansı artırıldı.
 
-### 📋 2. Yeni Menü & İçerik Yapısı (Sprint 1 & 2)
+###  2. Yeni Menü & İçerik Yapısı (Sprint 1 & 2)
 - **Zanaatkar Menü Sayfası:** Çikolata ve kahve kategorilerini içeren, premium tasarıma sadık kalınarak oluşturulmuş HTML tabanlı [Menu.tsx](./src/components/Menu.tsx) sayfası eklendi. Alt kısmına sommelier eşleştirme rehberi yerleştirildi.
 - **Blog & Hikayeler:** Nitelikli kahve ve zanaatkar çikolata üzerine 3 adet lüks makale içeren, kategori filtreli ve modal okuma pencereli [Blog.tsx](./src/components/Blog.tsx) sayfası oluşturuldu.
 - **Masonry Galeri:** Lüks görseller sunan ve Lightbox modalına sahip [Gallery.tsx](./src/components/Gallery.tsx) sayfası entegre edildi.
@@ -36,7 +36,7 @@
 
 ---
 
-## 🛠️ Teknoloji Yığını
+##  Teknoloji Yığını
 
 - **Framework:** [React 19](https://react.dev/)
 - **Build Tool:** [Vite 6](https://vitejs.dev/)
@@ -47,7 +47,7 @@
 
 ---
 
-## 🚀 Başlangıç
+##  Başlangıç
 
 Projeyi yerel makinenizde çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
