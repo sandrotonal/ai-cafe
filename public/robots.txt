@@ -1,0 +1,11 @@
+# Seiste Cafe & Restaurant
+# https://seiste.com
+
+User-agent: *
+Allow: /
+Disallow: /node_modules/
+
+Sitemap: https://seiste.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

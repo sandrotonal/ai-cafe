@@ -3,28 +3,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaInstagram, FaTwitter, FaEnvelope } from 'react-icons/fa6';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Menu from './components/Menu';
 import AIChat from './components/AIChat';
 import About from './components/About';
 import Contact from './components/Contact';
 import Legal from './components/Legal';
 import CookieBanner from './components/CookieBanner';
+import Blog from './components/Blog';
+import Gallery from './components/Gallery';
+import FAQ from './components/FAQ';
+import Testimonials from './components/Testimonials';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'menu' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms' | 'blog' | 'gallery' | 'faq' | 'testimonials'>('home');
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handleNavigate = (view: 'home' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms') => {
+  const handleNavigate = (view: 'home' | 'menu' | 'ai' | 'about' | 'contact' | 'cookies' | 'privacy' | 'terms' | 'blog' | 'gallery' | 'faq' | 'testimonials') => {
     setCurrentView(view);
   };
 
   const backgrounds = {
     home: '/images/cafe_interior.png',
+    menu: '/images/chocolate_dessert.png',
     ai: '/images/specialty_coffee.png',
     about: '/images/chocolate_dessert.png',
     contact: '/images/chocolate_truffles.png',
     cookies: '/images/chocolate_truffles.png',
     privacy: '/images/chocolate_truffles.png',
     terms: '/images/chocolate_truffles.png',
+    blog: '/images/specialty_coffee.png',
+    gallery: '/images/cafe_interior.png',
+    faq: '/images/chocolate_truffles.png',
+    testimonials: '/images/chocolate_dessert.png',
   };
 
   return (
@@ -67,7 +77,20 @@ export default function App() {
               transition={{ duration: 0.25 }}
               className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
-              <Home />
+              <Home onNavigate={handleNavigate} />
+            </motion.div>
+          )}
+
+          {currentView === 'menu' && (
+            <motion.div
+              key="menu-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
+            >
+              <Menu />
             </motion.div>
           )}
 
@@ -107,6 +130,58 @@ export default function App() {
               className="w-full min-h-screen absolute inset-0 overflow-y-auto"
             >
               <Contact />
+            </motion.div>
+          )}
+
+          {currentView === 'blog' && (
+            <motion.div
+              key="blog-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
+            >
+              <Blog />
+            </motion.div>
+          )}
+
+          {currentView === 'gallery' && (
+            <motion.div
+              key="gallery-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
+            >
+              <Gallery />
+            </motion.div>
+          )}
+
+          {currentView === 'faq' && (
+            <motion.div
+              key="faq-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
+            >
+              <FAQ />
+            </motion.div>
+          )}
+
+          {currentView === 'testimonials' && (
+            <motion.div
+              key="testimonials-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="w-full min-h-screen absolute inset-0 overflow-y-auto"
+            >
+              <Testimonials />
             </motion.div>
           )}
 
@@ -150,13 +225,13 @@ export default function App() {
             
             {/* Right: Social with real Icons — Compact */}
             <div className="flex gap-4 items-center pointer-events-auto text-white/30">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Instagram">
+              <a href="https://instagram.com/seistecafe" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Seiste Instagram" aria-label="Seiste Instagram">
                 <FaInstagram size={15} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Twitter/X">
+              <a href="https://twitter.com/seistecafe" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Seiste Twitter/X" aria-label="Seiste Twitter">
                 <FaTwitter size={15} />
               </a>
-              <a href="mailto:contact@seiste.com" className="hover:text-white transition-colors" title="Email Gönder">
+              <a href="mailto:contact@seiste.com" className="hover:text-white transition-colors" title="Email Gönder" aria-label="Email Gönder">
                 <FaEnvelope size={15} />
               </a>
             </div>

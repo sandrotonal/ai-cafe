@@ -1,0 +1,1 @@
+  kanka dıger rakıplerıde ıncleyerek bu projemızızı guvenlı sekılde eksıklıklerıne gore guncellemekısterım ; uıux bozulmadan her sey uyumlu repsonsıve olacak skeılde olmasını ısterım once rakıplerı ıncele eksıklerımız nedır ona gore gunvelleyelım kanka
